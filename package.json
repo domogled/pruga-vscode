@@ -11,14 +11,85 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "*"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+            "command": "pruga.init",
+            "title": "pruga init"
+        }],
+    "configuration": {
+        "type": "object",
+        "title": "Пруга configuration",
+        "properties": {
+            "pruga.showLevel": {
+                "type": "string",
+                "enmu": [
+                    "info",
+                    "warning",
+                    "error",
+                    "none"
+                ],
+                "default": "info",
+                "description": "Пруга show notice."
+            },
+            "pruga.livereload.port": {
+                "type": "integer",
+                "default": 35729,
+                "minimum": 1024,
+                "maximum": 65535,
+                "description": "Пруга livereload port number."
+            },
+            "pruga.server.web": {
+                "type": "string",
+                "default": "http://localhost",
+                "format": "uri",
+                "description": "Пруга server web site url."
+            },
+            "pruga.watch.buildedWeb": {
+                "type": "string",
+                "default": "build/dev/**/*",
+                "description": "Пруга watching compiled source on web preview site."
+            },
+            "pruga.compile.elm": {
+                "type": "string",
+                "default": "elm make ./src/app/Main.elm --yes --output ${build_dir}/scripts/app.js",
+                "description": "Пруга command to elm compile."
+            },
+            "pruga.compile.php": {
+                "type": "string",
+                "default": "php ./src/index.php --debug --typescript >  ${build_dir}/index.html",
+                "description": "Пруга command to php static home page compile."
+            },
+            "pruga.compile.typescript": {
+                "type": "string",
+                "default": "tsc ./src/scripts/index.ts --outFile  ${build_dir}/scripts/index.js",
+                "description": "Пруга command to compile typescript source to browser javascript."
+            },
+            "pruga.clean": {
+                "type": "string",
+                "default": "rm -r ${build_dir}",
+                "description": "Пруга command to delete all builded files."
+            },
+            "pruga.elm.test": {
+                "type": "string",
+                "default": "elm-test",
+                "description": "Пруга command to test elm project."
+            },
+            "pruga.copy.static": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "default": [
+                    "cp ./src/static/favicon.ico ${build_dir}/favicon.ico"
+                ],
+                "description": "Пруга command to copy static files."
+            }
+
+        }
+    }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
@@ -31,5 +102,10 @@
         "mocha": "^2.3.3",
         "@types/node": "^6.0.40",
         "@types/mocha": "^2.2.32"
-    }
+    },
+    "extensionDependencies": [
+        "domogled.pruga-vscode-builder",
+        "domogled.pruga-vscode-livereload",
+        "domogled.pruga-vscode-preview"
+    ]
 }
