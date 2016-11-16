@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
         const pruga_properties = pruga_extension.packageJSON.contributes.configuration.properties
         // console.dir(extension.);
 
-        const config = vscode.workspace.getConfiguration('pruga');
+        const config = vscode.workspace.getConfiguration('pruga')
 
         // const keys = ["showLevel"
         // , "livereload.port"
@@ -50,6 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
             option = option_a.join('.')
             const value = config.get(option);
             console.log(`${option}: ${value}`);
+            config['update'](option, value, false)
         };
     });
 
