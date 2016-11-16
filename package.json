@@ -69,7 +69,7 @@
             },
             "pruga.clean": {
                 "type": "string",
-                "default": "rm -r ./build/dev",
+                "default": "rm -r ./build/dev/*",
                 "description": "Пруга command to delete all builded files."
             },
             "pruga.elm.test": {
