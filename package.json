@@ -41,6 +41,11 @@
                 "maximum": 65535,
                 "description": "Пруга livereload port number."
             },
+            "pruga.livereload.autoStart": {
+                "type": "boolean",
+                "default": true,
+                "description": "Пруга livereload be start on workspace open."
+            },
             "pruga.server.web": {
                 "type": "string",
                 "default": "http://localhost",
